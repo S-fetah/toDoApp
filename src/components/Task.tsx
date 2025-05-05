@@ -3,12 +3,23 @@ import React, {useState} from 'react';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import ChildrenTasks from './ChildrenTasks';
 
-type taskTypes = {
-  task: string;
-  children?: string[];
+type taskPropTypes = {
+  task: taskType;
 };
-const Task = ({task, children}: taskTypes) => {
+export type taskType = {
+  title: string;
+  SubTasks: string;
+  status: string;
+};
+const Task = ({task}: taskPropTypes) => {
   const [checked, setChecked] = useState<boolean>(false);
+  const {title, SubTasks, status}: taskType = task;
+  const miniTasks = SubTasks?.split(',').filter(ele => ele && ele.length > 0);
+  if (status !== 'Idle') {
+    setChecked(true);
+  }
+  console.log(SubTasks);
+
   return (
     <>
       <View style={styles.view}>
@@ -16,7 +27,7 @@ const Task = ({task, children}: taskTypes) => {
           size={23}
           fillColor="#111111"
           unFillColor="#FFFFFF"
-          text={task}
+          text={title}
           textStyle={styles.text}
           iconStyle={styles.iconStyle}
           innerIconStyle={styles.iconStyle}
@@ -27,9 +38,10 @@ const Task = ({task, children}: taskTypes) => {
           iconComponent={<View />}
         />
       </View>
-      {children?.map((item, index) => (
-        <ChildrenTasks smallTask={item} key={item + index} />
-      ))}
+      {miniTasks?.length > 0 &&
+        miniTasks?.map((item, index) => (
+          <ChildrenTasks smallTask={item} key={item + index} />
+        ))}
     </>
   );
 };

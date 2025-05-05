@@ -69,7 +69,7 @@ export const addTask = async (
     const result = await db.executeSql(addQuery, [
       title,
       subTasks ?? null,
-      status,
+      'Idle',
     ]);
     return result[0].rowsAffected > 0;
   } catch (error) {

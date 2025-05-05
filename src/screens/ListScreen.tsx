@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -9,18 +9,28 @@ import {
 } from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
-import Task from '../components/Task';
+import Task, {taskType} from '../components/Task';
 import Psign from '../assets/Psign.png';
 
-let taskes: string[] = ['complete this section today!', ' Jib Jdid'];
-
 import {RootStackParams} from '../types';
+import {connectToDb, getTable} from '../../android/app/db/db';
 
 type listScreenProps = Readonly<
   NativeStackScreenProps<RootStackParams, 'List'>
 >;
 
 function ListScreen({navigation}: listScreenProps) {
+  const [tasks, setTasks] = useState<taskType[]>([]);
+
+  const fetchTasks = useCallback(async () => {
+    const db = await connectToDb();
+    const getTasks = await getTable(db);
+    setTasks(getTasks);
+  }, []);
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
+
   return (
     <SafeAreaProvider style={styles.container}>
       <SafeAreaView style={styles.safeContainer}>
@@ -29,13 +39,10 @@ function ListScreen({navigation}: listScreenProps) {
         </View>
         <ScrollView>
           <View>
-            {taskes.map(ele => {
-              return (
-                <Task task={ele} key={ele}>
-                  {['ali', 'mousa', 'fettah']}
-                </Task>
-              );
-            })}
+            {tasks.length > 0 &&
+              tasks.map(ele => {
+                return <Task task={ele} key={ele.title} />;
+              })}
           </View>
         </ScrollView>
         <TouchableOpacity
