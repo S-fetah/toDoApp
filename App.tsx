@@ -5,8 +5,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParams} from './src/types';
 import ListScreen from './src/screens/ListScreen';
 import TaskPopUp from './src/components/TaskPopUp';
-const Stack = createNativeStackNavigator<RootStackParams>();
 
+const Stack = createNativeStackNavigator<RootStackParams>();
 function App() {
   return (
     <NavigationContainer>
