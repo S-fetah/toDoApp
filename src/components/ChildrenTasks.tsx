@@ -24,7 +24,7 @@ const ChildrenTasks = ({smallTask}: ChildrenTasksProps) => {
         iconComponent={
           isDone ? <Image source={done} style={styles.checkmarkImage} /> : null
         }
-        innerIconStyle={isDone ? {borderWidth: 0} : {borderWidth: 1}}
+        innerIconStyle={isDone ? {borderWidth: 0} : {borderWidth: 2}}
         iconStyle={isDone ? {backgroundColor: 'transparent'} : ''}
       />
     </View>

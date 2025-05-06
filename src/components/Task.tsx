@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     color: '#111111',
-    fontWeight: '400',
+    fontWeight: '600',
     textAlign: 'left',
     letterSpacing: -0.17,
   },

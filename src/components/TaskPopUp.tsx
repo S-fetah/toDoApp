@@ -160,10 +160,10 @@ export default function TaskPopUp({navigation}: TaskPopUpPropType) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FBFAF8',
+    backgroundColor: 'white',
   },
   popup: {
-    backgroundColor: '#FBFAF8',
+    backgroundColor: 'white',
     width: '100%',
     height: 'auto',
     alignItems: 'center',
@@ -208,9 +208,10 @@ const styles = StyleSheet.create({
   picContainer: {
     width: '100%',
     alignItems: 'center',
-    backgroundColor: '#FBFAF8',
+    backgroundColor: 'white',
     height: 'auto',
     textAlign: 'center',
+    marginTop: 20,
   },
   pic: {
     width: '70%',
